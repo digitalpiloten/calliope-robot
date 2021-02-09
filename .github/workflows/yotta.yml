@@ -1,0 +1,23 @@
+name: Yotta CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Yotta
+      uses: marvinschopf/install-yotta@main
+    - name: Install GCC ARM None EABI toolchain
+      uses: marvinschopf/install-gcc-arm-none-eabi@main
+    - name: Update
+      run: yotta update
+    - name: Build
+      run: yotta build
